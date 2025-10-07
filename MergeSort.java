@@ -1,5 +1,5 @@
 import java.util.Arrays;
-
+// Ý tưởng: Chia nhỏ nó ra rồi sắp xếp
 public class MergeSort {
     public static void main(String[] args) {
         int[] arr = {12, 9, 1, 5, 8};
@@ -20,9 +20,11 @@ public class MergeSort {
                                " | Phải: " + Arrays.toString(Arrays.copyOfRange(arr, mid + 1, right + 1)));
 
             // Đệ quy chia mảng bên trái và bên phải
-            // Được chia nửa đến khi nào mảng còn 1 rồi quăng vào merge
-            mergeSort(arr, left, mid);
-            mergeSort(arr, mid + 1, right);
+            // Được chia nửa đến khi nào mảng còn 1 cái mỗi bên trái phải rồi quăng vào merge
+            
+            // Lần gọi đầu tiên nó ở main đã tách thành 2 nửa trước rồi mới xử lý tiếp dưới đây
+            mergeSort(arr, left, mid); // Gọi mergeSort(arr, 0, 2)  Chạy tách nửa trái hết rồi merge  mới xử lý tiếp xuống nửa phải
+            mergeSort(arr, mid + 1, right); // Gọi mergeSort(arr, 3, 4)
 
             // Gộp hai nửa lại
             merge(arr, left, mid, right);
@@ -88,3 +90,11 @@ public class MergeSort {
         System.out.println("Kết quả gộp: " + Arrays.toString(Arrays.copyOfRange(arr, left, right + 1)));
     }
 }
+
+// 1	Bắt đầu với mảng gốc [12, 9, 1, 5, 8]	main()
+// 2	Chia đôi → [12, 9, 1] và [5, 8]	mergeSort(arr, 0, 4)
+// 3	Xử lý nửa trái [12, 9, 1] → chia tiếp → [12, 9] và [1]	mergeSort(arr, 0, 2)
+// 4	[12, 9] lại chia tiếp thành [12] và [9] rồi merge lại thành [9, 12]	Đệ quy nhỏ
+// 5	Giờ merge [9, 12] với [1] → [1, 9, 12]	Merge kết quả nửa trái
+// 6	Sau đó mới xử lý nửa phải [5, 8] → chia → [5], [8], merge → [5, 8]	mergeSort(arr, 3, 4)
+// 7	Cuối cùng merge [1, 9, 12] với [5, 8] → [1, 5, 8, 9, 12]

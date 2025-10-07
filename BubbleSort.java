@@ -10,7 +10,7 @@ public class BubbleSort {
             arr[i] = sc.nextInt();
         }
         System.out.println("Unsorted Array: " + Arrays.toString(arr));
-        for(int i=0; i<n-1; i++){
+        for(int i=0; i<n-1; i++){ // Sau vòng lặp đầu số to nhất sẽ về cuối mảng
             for(int j = 0; j<n - i -1; j++){
                 if(arr[j] > arr[j+1]){
                     //Phải có biến tạm để lưu i
